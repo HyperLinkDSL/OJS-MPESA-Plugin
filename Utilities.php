@@ -71,7 +71,7 @@ class Utilities {
     }
 
     public function querySTKStatus($context, $checkoutRequestID){
-        $httpClient = Application::get()->getHttpClient();
+
         try {
             $token = $this->plugin->isTestMode($context)
                 ? $this->generateSandBoxToken()
@@ -97,7 +97,7 @@ class Utilities {
                 'Timestamp' => $timestamp,
                 'CheckoutRequestID' => $checkoutRequestID
             ];
-
+            $httpClient = Application::get()->getHttpClient();
             $resp = $httpClient->request('POST', $reqUrl, [
                 'headers' => $reqHeaders,
                 'json' => $reqBody,
@@ -120,19 +120,17 @@ class Utilities {
         if(!isset($consumerId)||!isset($consumerSecret)){
             die("LIVE - please declare the consumer key and consumer secret as defined in the documentation");
         }
-        $url = 'https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, $url);
-        $credentials = base64_encode($consumerId.':'.$consumerSecret);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Basic '.$credentials)); //setting a custom header
-        curl_setopt($curl, CURLOPT_HEADER, false);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        $reqUrl = 'https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
 
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        $credentials = base64_encode($consumerId . ':' . $consumerSecret);
+        $httpClient = Application::get()->getHttpClient();
+        $response = $httpClient->request('GET', $reqUrl, [
+            'headers' => [ 'Authorization' => 'Basic ' . $credentials]
+        ]);
 
-        $curl_response = curl_exec($curl);
-
-        return json_decode($curl_response)->access_token;
+        $respBody = $response->getBody()->getContents();
+        $decodedResp = json_decode($respBody);
+        return $decodedResp->access_token;
 
     }
     public function generateSandBoxToken(){
@@ -145,21 +143,18 @@ class Utilities {
         if(!isset($consumerId)||!isset($consumerSecret)){
             die("SANDBOX - please declare the consumer key and consumer secret as defined in the documentation");
         }
-        $url = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, $url);
-        $credentials = base64_encode($consumerId.':'.$consumerSecret);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Basic '.$credentials)); //setting a custom header
-        curl_setopt($curl, CURLOPT_HEADER, false);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        $reqUrl = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
 
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        $credentials = base64_encode($consumerId . ':' . $consumerSecret);
+        $httpClient = Application::get()->getHttpClient();
+        $response = $httpClient->request('GET', $reqUrl, [
+            'headers' => [ 'Authorization' => 'Basic ' . $credentials]
+        ]);
 
-        $curl_response = curl_exec($curl);
+        $respBody = $response->getBody()->getContents();
+        $decodedResp = json_decode($respBody);
+        return $decodedResp->access_token;
 
-        $access_token = json_decode($curl_response)->access_token;
-
-        return $access_token;
     }
 
 }

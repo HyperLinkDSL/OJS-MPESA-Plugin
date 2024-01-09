@@ -13,16 +13,19 @@
         <div class="column column-1">
             <img src="{$mpesaLogoUrl}" alt="mpesa logo">
         </div>
-        <div class="column column-2">
+        <div class="column column-2 bordered">
             <h1 class="page_title">
                 {translate key="plugins.paymethod.mpesa.stkRequestedHeader"}
             </h1>
             <div>
-                MPESA request has been sent to {$phoneNumber},
-                <ol>
-                    <li>Please enter your MPESA PIN </li>
-                    <li>Click the button below to confirm payment.</li>
-                </ol>
+                <p>
+                    MPESA request has been sent to <strong>{$phoneNumber}</strong>
+                    <ol>
+                        <li>Please enter your MPESA PIN </li>
+                        <li>Click the button below to confirm payment.</li>
+                    </ol>
+                </p>
+
                 <form class="pkp_form" id="mpesaConfirmPayment" method="POST"
                       action="{url page="payment" op="plugin" path=$pluginName|to_array:'confirm-payment':$queuedPaymentId}">
                     <p>

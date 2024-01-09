@@ -12,7 +12,6 @@
 <div class="page page_payment_form">
     <div class="container">
         <div class="column column-1">
-            <!-- Content for the first column -->
             <img src="{$mpesaLogoUrl}" alt="mpesa logo">
         </div>
         <div class="column column-2">
@@ -41,7 +40,8 @@
                     <tr>
                         <th>{translate key="plugins.paymethod.mpesa.purchase.phoneNumber"}</th>
                         <td>
-                            <input type="text" id="phoneNumber" name="phoneNumber" value="{$paymentForm.phoneNumber|default:''}">
+                            <input type="text" id="phoneNumber" name="phoneNumber"
+                                   value="{$paymentForm.phoneNumber|default:''}" required>
                             {if $errors.phoneNumber}
                                 <span class="error">{$errors.phoneNumber}</span>
                             {/if}
@@ -49,8 +49,6 @@
                     </tr>
 
                 </table>
-                {*        <p>{$submitUrl}</p>*}
-                <!-- Other form fields -->
                 <p>
                     <input type="submit" value="Send Request" class="cmp_button" />
                 </p>

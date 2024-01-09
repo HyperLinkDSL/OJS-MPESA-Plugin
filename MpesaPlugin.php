@@ -44,6 +44,10 @@ class MpesaPlugin extends PaymethodPlugin {
 
         if ($action == 'simulate'){
 
+            if ($request->isGet()) {
+                throw new \Exception("Invalid request in simulate stkPush");
+            }
+
             try {
 
                 $businessShortCode = $this->getSetting($journal->getId(), 'businessShortCode');
@@ -95,7 +99,9 @@ class MpesaPlugin extends PaymethodPlugin {
             $mpesaReqId = $decodedResp->{'CheckoutRequestID'};
 
             if($decodedResp->{'ResultCode'} == '0'){
-                //$paymentManager->fulfillQueuedPayment($request, $queuedPayment, $this->getName());
+
+                $paymentManager->fulfillQueuedPayment($request, $queuedPayment, $this->getName());
+
                 $callbackMetadataItems = $decodedResp->{'CallbackMetadata'}->{'Item'};
                 $receiptNumber = null;
 
@@ -113,6 +119,10 @@ class MpesaPlugin extends PaymethodPlugin {
         }
 
         if ($action == 'confirm-payment'){ //query the transaction status
+
+            if ($request->isGet()) {
+                throw new \Exception("Invalid request in confirm-payment");
+            }
 
             $utilities = new Utilities($this);
             $checkoutReqId = $request->getUserVar('checkoutReqId');

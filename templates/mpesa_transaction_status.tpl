@@ -14,7 +14,7 @@
             <!-- Content for the first column -->
             <img src="{$mpesaLogoUrl}" alt="mpesa logo">
         </div>
-        <div class="column column-2">
+        <div class="column column-2 bordered">
             <h1 class="page_title">
                 {translate key="plugins.paymethod.mpesa.transactionStatusHeader"}
             </h1>
@@ -28,8 +28,5 @@
             </div>
         </div>
     </div>
-
-
-
 </div>
 {include file="frontend/components/footer.tpl"}
