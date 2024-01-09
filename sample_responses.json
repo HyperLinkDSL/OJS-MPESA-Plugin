@@ -1,0 +1,64 @@
+# STKPush Error response
+
+{
+  "requestId":"17152-132773044-1",
+  "errorCode": "500.001.1001",
+  "errorMessage": "Output data invalid"
+}
+# STKCallback with error
+{
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "10977-11173352-1",
+      "CheckoutRequestID": "ws_CO_09012024124301259715397755",
+      "ResultCode": 6001,
+      "ResultDesc": "M-PESA is undergoing scheduled maintenance"
+    }
+  }
+}
+
+# STKcallback success resp
+{
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "17152-135900169-1",
+      "CheckoutRequestID": "ws_CO_09012024145635438715397755",
+      "ResultCode": 0,
+      "ResultDesc": "The service request is processed successfully.",
+      "CallbackMetadata": {
+        "Item": [
+          {
+            "Name": "Amount",
+            "Value": 10
+          },
+          {
+            "Name": "MpesaReceiptNumber",
+            "Value": "SA93IYCQ0D"
+          },
+          {
+            "Name": "Balance"
+          },
+          {
+            "Name": "TransactionDate",
+            "Value": 20240109145434
+          },
+          {
+            "Name": "PhoneNumber",
+            "Value": 25471539xxxx
+          }
+        ]
+      }
+    }
+  }
+}
+
+# STK status query resp
+
+{
+  "ResponseCode": "0",
+  "ResponseDescription": "The service request has been accepted successsfully",
+  "MerchantRequestID": "97003-20366920-1",
+  "CheckoutRequestID": "ws_CO_09012024172535586715397755",
+  "ResultCode": "0",
+  "ResultDesc": "The service request is processed successfully."
+}
