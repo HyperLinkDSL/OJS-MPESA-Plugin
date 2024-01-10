@@ -38,7 +38,7 @@ class Utilities {
         }
 
         $timestamp = '20' . date(    "ymdhis");
-        $passKey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
+        $passKey = $this->plugin->getSetting($context, "mpesaPassKey");
         $password= base64_encode($BusinessShortCode.$passKey.$timestamp);
         $transactionType = "CustomerPayBillOnline";
 
@@ -84,7 +84,7 @@ class Utilities {
             $reqUrl = $this->plugin->isTestMode($context) ? $testUrl : $liveUrl;
 
             $timestamp = '20' . date(    "ymdhis");
-            $passKey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
+            $passKey = $this->plugin->getSetting($context, 'mpesaPassKey');
             $password= base64_encode($businessShortCode.$passKey.$timestamp);
             $reqHeaders = [
                 'Content-Type' => 'application/json',

@@ -21,7 +21,8 @@
                 <p>
                     MPESA request has been sent to <strong>{$phoneNumber}</strong>
                     <ol>
-                        <li>Please enter your MPESA PIN </li>
+                        <li>Please enter your MPESA PIN on your phone</li>
+                        <li>Wait to receive MPESA confirmation SMS </li>
                         <li>Click the button below to confirm payment.</li>
                     </ol>
                 </p>

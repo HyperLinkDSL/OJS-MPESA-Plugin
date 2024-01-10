@@ -19,10 +19,7 @@
                 {translate key="plugins.paymethod.mpesa"}
             </h1>
 
-            <form
-                    class="pkp_form"
-                    id="mpesaRequestPayment"
-                    method="POST"
+            <form class="pkp_form" id="mpesaRequestPayment" method="POST"
                     action="{url page="payment" op="plugin" path=$pluginName|to_array:'simulate':$queuedPaymentId}"
             >
                 <table class="cmp_table">
@@ -47,7 +44,6 @@
                             {/if}
                         </td>
                     </tr>
-
                 </table>
                 <p>
                     <input type="submit" value="Send Request" class="cmp_button" />

@@ -183,6 +183,7 @@ class MpesaPlugin extends PaymethodPlugin {
                     $saveParams[$param] = $val === 'true';
                     break;
                 case 'consumerId':
+                case 'mpesaPassKey':
                 case 'businessShortCode':
                 case 'consumerSecret':
                     $saveParams[$param] = (string) $val;
@@ -229,6 +230,11 @@ class MpesaPlugin extends PaymethodPlugin {
             ->addField(new \PKP\components\forms\FieldText('consumerSecret', [
                 'label' => 'Consumer Secret',
                 'value' => $this->getSetting($context->getId(), 'consumerSecret'),
+                'groupId' => 'mpesapayment',
+            ]))
+            ->addField(new \PKP\components\forms\FieldText('mpesaPassKey', [
+                'label' => 'Pass Key',
+                'value' => $this->getSetting($context->getId(), 'mpesaPassKey'),
                 'groupId' => 'mpesapayment',
             ]))
             ->addField(new \PKP\components\forms\FieldText('businessShortCode', [
